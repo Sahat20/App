@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Update Order Status</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Admin Panel - Update Order Status</h1>
+
+<label for="orderNumber">Enter Order Number:</label>
+<input type="text" id="orderNumber" placeholder="Enter Order Number" />
+
+<button onclick="updateStatus('Order Received')">Order Received</button>
+<button onclick="updateStatus('Preparing Your Food')">Preparing Your Food</button>
+<button onclick="updateStatus('Out for Delivery')">Out for Delivery</button>
+<button onclick="updateStatus('Delivered')">Delivered</button>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvh2wGCabtFTx9ck6LPCyuoCNg0T3mnbM",
+    authDomain: "sarafooddelivery-b2d71.firebaseapp.com",
+    projectId: "sarafooddelivery-b2d71",
+    storageBucket: "sarafooddelivery-b2d71.appspot.com",
+    messagingSenderId: "921308454823",
+    appId: "1:921308454823:web:8cb940c133b3a780286082",
+    measurementId: "G-0K9LMC4YSM"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  function updateStatus(status) {
+    const orderNumber = document.getElementById('orderNumber').value;
+
+    if (orderNumber.trim() === '') {
+      alert('Please enter an order number.');
+      return;
+    }
+
+    const orderRef = database.ref('orders/' + orderNumber); // Using the order number as the reference
+    orderRef.set({
+      status: status,
+      timestamp: Date.now()
+    });
+
+    alert('Order Status for Order ' + orderNumber + ' Updated to: ' + status);
+  }
+</script>
+
+</body>
+</html>

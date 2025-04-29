@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delicious Menu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f8f8;
+    }
+
+    header {
+      background-color: #F34307;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      text-align: left;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    .open-btn {
+      font-size: 24px;
+      cursor: pointer;
+      padding: 12px 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card-body h3 {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .card-body p {
+      color: #666;
+      font-size: 1.1rem;
+      margin: 5px 0;
+    }
+
+    .card-body a {
+      display: inline-block;
+      background: #ff6b6b;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+
+    .card-body a:hover {
+      background: #ff4b4b;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #f8f9fa;
+      text-align: center;
+      padding: 20px;
+      border-top: 3px solid #ffc107;
+      margin-top: 40px;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/5ZvzS6j/Black-Yellow-Illustrative-Photography-Logo.png" alt="Black-Yellow-Illustrative-Photography-Logo" width="150" height="150" align="left"></a>
+<h3>Irresistible Snacks & Junk Food: Satisfy Your Cravings!</h3>
+</header>
+
+<!-- Right Side Panel -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<div id="rightPanel" class="side-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+
+</div>
+
+<div style="background-color: #ffc107; text-align: center; padding: 10px; font-weight: bold;">
+  Everything You Need, Just a Click Away!
+</div>
+
+<div class="menu" id="menu">
+  <!-- Food cards will be injected here -->
+</div>
+
+<script>
+  // Side Panel JavaScript
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+
+  // Food Items Data
+  const chipsItems = [
+    { name: "Parle Gluco", img: "https://m.media-amazon.com/images/I/71bufOt9zAL.jpg", price: "₹5, ₹10" },
+    { name: "20-20 Cookies", img: "https://www.parleproducts.com/uploads/Image/3prdtbann_20-20-Range_1900X788.jpg", price: "₹5, ₹10" },
+    { name: "Krackjack Biscuits", img: "https://www.quicklly.com/upload_images/product/1496136729-parle-krackjack-biscuits.jpg", price: "₹5, ₹10" },
+    { name: "Monaco", img: "https://www.quicklly.com/upload_images/product/1602444746-parle-monaco-biscuits.jpg", price: "₹10" },
+    { name: "Happy Happy Biscuits", img: "https://5.imimg.com/data5/QY/UK/LC/SELLER-32943822/parle-happy-happy-chocolate-biscuit-500x500.jpg", price: "₹5, ₹10" },
+    { name: "Hide & Seek Biscuits", img: "https://5.imimg.com/data5/SELLER/Default/2021/2/PI/YV/ZA/14475970/hide-n-seek-biscuit-1000x1000.jpg", price: "₹10, ₹25, ₹35" },
+    { name: "Good Day", img: "https://cdn.shopify.com/s/files/1/1565/3339/products/11100_764_1800x833.jpg?v=1579888284", price: "₹5, ₹10, ₹30" },
+    { name: "50-50", img: "https://m.media-amazon.com/images/I/71XzTkkL8UL._SL1500_.jpg", price: "₹5, ₹10" },
+    { name: "Nutri Choice", img: "https://rukminim1.flixcart.com/image/832/832/k8j3gcw0/cookie-biscuit/c/z/g/200-nutri-choice-5-grain-digestive-biscuits-britannia-original-imafqgw8sk8x9pg9.jpeg?q=70", price: "₹10, ₹25, ₹50, ₹75, ₹199" },
+    { name: "Marie Gold", img: "https://aukart.com.au/wp-content/uploads/2021/11/91EZFX7dVWL._SL1500_.jpg", price: "₹5, ₹10, ₹20, ₹35" },
+    { name: "Tiger", img: "https://daganghalal.blob.core.windows.net/28032/Product/1000x1000__tigerbiscuitoriginal1000x1000-1635312592873.jpg", price: "₹5, ₹10" },
+    { name: "Dark Fantasy Biscuit", img: "https://th.bing.com/th/id/OIP.JuIpfwdok6WakEKXvWYizgHaHa?rs=1&pid=ImgDetMain", price: "₹10, ₹30, ₹350" },
+    { name: "Mom’s Magic Biscuits", img: "https://www.mishry.com/wp-content/uploads/2022/06/the-3-variants-of-sunfeast-moms-magic-biscuits-we-reviewed.jpg", price: "₹10, ₹20, ₹30" },
+    { name: "Sunfeast Glucose Biscuits", img: "https://m.media-amazon.com/images/I/718MDt1UWgL._SL1500_.jpg", price: "₹5, ₹10" },
+    { name: "Farmlite by Sunfeast", img: "https://www.bigbasket.com/media/uploads/p/l/40220552_3-sunfeast-farmlite-oats-bundle-pack.jpg", price: "₹40" },
+    { name: "Cheese Cracker", img: "https://th.bing.com/th/id/OIP.4WGcIQ5o3i71O9bfyOKyfgHaE8?rs=1&pid=ImgDetMain", price: "₹50" },
+    { name: "Digestive Biscuits", img: "https://cdnprod.mafretailproxy.com/sys-master-root/hfa/hee/12832925188126/5536_main.jpg_1700Wx1700H", price: "₹10" },
+    { name: "Patanjali Doodh Biscuits", img: "https://aws.patanjaliayurved.net/assets/product_images/400x500/16900166171.png", price: "₹40" },
+    { name: "Patanjali Nariyal Cookies", img: "https://jaimata.co.in/wp-content/uploads/2023/09/NariyalCookies200g1-e1695723193845.png", price: "₹50" },
+    { name: "Bourbon Biscuits", img: "https://th.bing.com/th/id/OIP.RzmFfph4IlGQahuagpnTrgAAAA?rs=1&pid=ImgDetMain", price: "₹30" },
+    { name: "Oreo", img: "https://cdn0.woolworths.media/content/wowproductimages/large/071627.jpg", price: "₹10, ₹30" }
+  ];
+
+  const menu = document.getElementById('menu');
+
+  chipsItems.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div class="card-body">
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+        <a href="booking.html">Order Now</a>
+      </div>
+    `;
+    menu.appendChild(card);
+  });
+</script>
+
+<footer>
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍴
+</footer>
+
+</body>
+</html>

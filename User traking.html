@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SaRa Food Delivery - Track Your Order</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <style>
+    /* Your existing CSS here */
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8f9fa, #e0e0e0);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #343a40;
+    }
+    .order-input {
+      margin: 20px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      width: 250px;
+      font-size: 16px;
+      outline: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .status {
+      font-size: 28px;
+      padding: 15px 30px;
+      background-color: #fff;
+      display: inline-block;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      margin-top: 20px;
+      transition: all 0.5s ease;
+    }
+    .last-updated {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #555;
+    }
+    .delivery-animation {
+      width: 100px;
+      margin: 30px auto;
+      animation: moveBike 3s infinite alternate;
+    }
+    @keyframes moveBike {
+      0% { transform: translateX(-30px); }
+      100% { transform: translateX(30px); }
+    }
+    .loader {
+      margin: 50px auto;
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #28a745;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .progress-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 20px;
+      position: relative;
+    }
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      background-color: #ddd;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff;
+      font-size: 20px;
+      transition: all 0.5s ease;
+    }
+    .step-label {
+      margin-top: 8px;
+      font-size: 14px;
+      max-width: 80px;
+      text-align: center;
+    }
+    .active {
+      background-color: #28a745 !important;
+    }
+    .line {
+      width: 60px;
+      height: 4px;
+      background-color: #ddd;
+      position: absolute;
+      top: 18px;
+      left: 50px;
+      z-index: -1;
+      transition: all 0.5s ease;
+    }
+    .line.active {
+      background-color: #28a745;
+    }
+    footer {
+      background-color: #343a40; /* dark gray background */
+      color: #f8f9fa;             /* light text color */
+      text-align: center;
+      padding: 20px;
+      border-top: 3px solid #ffc107; /* golden yellow top border */
+      margin-top: 40px;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+    }
+
+    /* Side Panel styles */
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      text-align: left;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    .open-btn {
+      font-size: 24px;
+      cursor: pointer;
+      padding: 12px 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🚚 Track Your Order</h1>
+
+<!-- Side Panel Button -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<!-- Side Panel -->
+<div id="rightPanel" class="side-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+
+</div>
+
+<!-- Order Tracking Section -->
+<div class="order-input">
+  <input type="text" id="orderNumberInput" placeholder="Enter your Order Number">
+  <button onclick="trackOrder()">Track</button>
+</div>
+
+<div class="delivery-animation">
+  <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" alt="Delivery Bike" width="100%">
+</div>
+
+<div class="status" id="orderStatus">Waiting for Order Number...</div>
+<div class="last-updated" id="lastUpdated"></div>
+
+<div class="progress-container">
+  <div class="step" id="step1">
+    <div class="step-circle">1</div>
+    <div class="step-label">Order Received</div>
+    <div class="line" id="line1"></div>
+  </div>
+  <div class="step" id="step2">
+    <div class="step-circle">2</div>
+    <div class="step-label">Preparing Food</div>
+    <div class="line" id="line2"></div>
+  </div>
+  <div class="step" id="step3">
+    <div class="step-circle">3</div>
+    <div class="step-label">Out for Delivery</div>
+    <div class="line" id="line3"></div>
+  </div>
+  <div class="step" id="step4">
+    <div class="step-circle">4</div>
+    <div class="step-label">Delivered</div>
+  </div>
+</div>
+
+<div id="loader" class="loader" style="display:none;"></div>
+
+<footer>
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvh2wGCabtFTx9ck6LPCyuoCNg0T3mnbM",
+    authDomain: "sarafooddelivery-b2d71.firebaseapp.com",
+    projectId: "sarafooddelivery-b2d71",
+    storageBucket: "sarafooddelivery-b2d71.appspot.com",
+    messagingSenderId: "921308454823",
+    appId: "1:921308454823:web:8cb940c133b3a780286082",
+    measurementId: "G-0K9LMC4YSM",
+    databaseURL: "https://sarafooddelivery-b2d71-default-rtdb.firebaseio.com"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  const statusDiv = document.getElementById('orderStatus');
+  const lastUpdatedDiv = document.getElementById('lastUpdated');
+  const loader = document.getElementById('loader');
+
+  const steps = {
+    "Order Received": 1,
+    "Preparing Your Food": 2,
+    "Out for Delivery": 3,
+    "Delivered": 4
+  };
+
+  let currentOrderListener = null;
+
+  function updateProgress(stepNumber) {
+    for (let i = 1; i <= 4; i++) {
+      const circle = document.querySelector(`#step${i} .step-circle`);
+      const line = document.getElementById(`line${i-1}`);
+      if (i <= stepNumber) {
+        circle.classList.add('active');
+        if (line) line.classList.add('active');
+      } else {
+        circle.classList.remove('active');
+        if (line) line.classList.remove('active');
+      }
+    }
+  }
+
+  function trackOrder() {
+    const orderNumber = document.getElementById('orderNumberInput').value.trim();
+    if (!orderNumber) {
+      alert('Please enter your Order Number');
+      return;
+    }
+
+    // Remove previous listener if any
+    if (currentOrderListener) {
+      currentOrderListener.off();
+    }
+
+    loader.style.display = 'block';
+    statusDiv.innerText = 'Loading order status...';
+    updateProgress(0);
+
+    const orderRef = database.ref(`orders/${orderNumber}`);
+
+    currentOrderListener = orderRef;
+    orderRef.on('value', (snapshot) => {
+      const data = snapshot.val();
+      if (data && data.status) {
+        loader.style.display = 'none';
+        statusDiv.innerText = data.status;
+
+        if (steps[data.status]) {
+          updateProgress(steps[data.status]);
+        } else {
+          updateProgress(0);
+        }
+
+        if (data.status === 'Order Received') {
+          statusDiv.style.backgroundColor = '#17a2b8';
+        } else if (data.status === 'Preparing Your Food') {
+          statusDiv.style.backgroundColor = '#ffc107';
+        } else if (data.status === 'Out for Delivery') {
+          statusDiv.style.backgroundColor = '#fd7e14';
+        } else if (data.status === 'Delivered') {
+          statusDiv.style.backgroundColor = '#28a745';
+        } else {
+          statusDiv.style.backgroundColor = '#6c757d';
+        }
+
+        if (data.timestamp) {
+          const date = new Date(data.timestamp);
+          lastUpdatedDiv.innerText = `Last updated: ${date.toLocaleTimeString()}`;
+        } else {
+          lastUpdatedDiv.innerText = '';
+        }
+      } else {
+        loader.style.display = 'none';
+        statusDiv.innerText = 'Order not found. Please check your Order Number.';
+        lastUpdatedDiv.innerText = '';
+        updateProgress(0);
+      }
+    });
+  }
+
+  // Open and close side panel functionality
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+</script>
+
+</body>
+</html>

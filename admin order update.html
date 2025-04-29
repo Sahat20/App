@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 30px;
+    }
+    .form-container {
+      max-width: 600px; margin: auto; background: #fff; padding: 20px;
+      border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%; padding: 10px; margin: 10px 0;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    .delete-btn {
+      background: #e74c3c; color: white; border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Admin - Add / Update Order</h2>
+    <form id="orderForm">
+      <input type="text" id="orderId" placeholder="Order ID" required />
+      <input type="text" id="userName" placeholder="Customer Name" required />
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="text" id="address" placeholder="Address" required />
+      <input type="text" id="date" placeholder="Date (e.g., 29 April 2025)" required />
+      <input type="text" id="status" placeholder="Status (e.g., Delivered)" required />
+      <textarea id="items" placeholder='Items (e.g., Pizza:1,Coke:2)' required></textarea>
+      <input type="number" id="total" placeholder="Total ₹" required />
+      <button type="submit">Save Order</button>
+    </form>
+
+    <!-- Delete Button -->
+    <button class="delete-btn" onclick="deleteOrder()">Delete Order</button>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, doc, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCSrIMO6NciLkC1vZ2rDdl31kmIas5X13w",
+      authDomain: "order-5aa43.firebaseapp.com",
+      projectId: "order-5aa43",
+      storageBucket: "order-5aa43.appspot.com",
+      messagingSenderId: "1092838567302",
+      appId: "1:1092838567302:web:83d739f68c4fafaf5d9007",
+      measurementId: "G-WTW0QT6P4Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+    document.getElementById("orderForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const orderId = document.getElementById("orderId").value;
+      const date = document.getElementById("date").value;
+      const itemsInput = document.getElementById("items").value;
+      const status = document.getElementById("status").value;
+      const total = parseInt(document.getElementById("total").value);
+
+      const userName = document.getElementById("userName").value;
+      const address = document.getElementById("address").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+
+      const items = itemsInput.split(",").map(item => {
+        const [name, quantity] = item.split(":");
+        return { name: name.trim(), quantity: parseInt(quantity) };
+      });
+
+      try {
+        await setDoc(doc(db, "orders", orderId), {
+          orderId,
+          date,
+          items,
+          status,
+          total,
+          userName,
+          address,
+          phone,
+          email,
+          timestamp: serverTimestamp()
+        });
+        alert("Order saved successfully!");
+        e.target.reset();
+      } catch (error) {
+        console.error("Error saving order:", error);
+        alert("Failed to save order. Check console for error.");
+      }
+    });
+
+    // Delete order by orderId
+    window.deleteOrder = async () => {
+      const orderId = document.getElementById("orderId").value.trim();
+      if (!orderId) {
+        alert("Please enter an Order ID to delete.");
+        return;
+      }
+
+      const confirmDelete = confirm(`Are you sure you want to delete order ID "${orderId}"?`);
+      if (!confirmDelete) return;
+
+      try {
+        await deleteDoc(doc(db, "orders", orderId));
+        alert(`Order ID "${orderId}" deleted successfully.`);
+        document.getElementById("orderForm").reset();
+      } catch (error) {
+        console.error("Error deleting order:", error);
+        alert("Failed to delete order. Check console for error.");
+      }
+    };
+  </script>
+</body>
+</html>

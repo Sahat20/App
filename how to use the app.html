@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How To</title>
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* Side Panel styles */
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      text-align: left;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    .open-btn {
+      font-size: 24px;
+      cursor: pointer;
+      padding: 12px 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #F34307;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 500;
+    }
+
+    /* Other Page Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+      background-color: #F34307;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 920px;
+      margin: 20px auto;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .instructions {
+      margin-bottom: 30px;
+    }
+
+    .video-container {
+      display: block;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #343a40;
+      color: #f8f9fa;
+      border-top: 3px solid #ffc107;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Side Panel -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<div id="rightPanel" class="side-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+
+</div>
+
+<header>
+    <h1>How to Use the SaRa Food Delivery App</h1>
+</header>
+
+<div class="container">
+  <div class="instructions">
+    <h2>Follow these simple steps to use the SaRa Food Delivery app:</h2>
+    <ol>
+      <li><b>Download the App:</b> Get SaRa Food Delivery from the App Store or Google Play.</li>
+      <li><b>Sign In or Create an Account:</b> Log in easily or set up a new account in just a few taps.</li><br>
+      <li><b>Browse the Menu:</b> Explore a variety of delicious homemade meals crafted by our expert chefs.</li>
+      <li>📞 Call our chefs to know today's menu or to book your special order!</li><br>
+      <li><b>Select and Order:</b> Choose your favorite dishes and place your order seamlessly — or call to place your order and then proceed to the app for payment.</li>
+      <li><b>Track Your Delivery:</b> Follow your order in real-time and get it delivered right to your doorstep!</li>
+    </ol>
+  </div>
+
+  <div class="video-container">
+    <div class="video">
+      <h3>Video 1: How to Sign In and Browse Meals</h3>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="How to Sign In and Browse Meals" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="video">
+      <h3>Video 2: How to Place an Order and Track Delivery</h3>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="How to Place an Order and Track Delivery" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 18px; border-radius: 8px; margin: 20px 0;">
+    <span style="font-weight: bold; color: #e74c3c;">Please Note:</span> 
+    For special meals, scheduling future orders, and custom meal requests, 
+    <span style="font-weight: bold; color: #e74c3c;">you must call and place your order the day before.</span>
+  </div>
+</div>
+
+<footer>
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+<!-- JavaScript for Side Panel -->
+<script>
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+</script>
+
+</body>
+</html>

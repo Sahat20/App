@@ -1,0 +1,12 @@
+.open-btn {
+  background: #0069d9; /* a slightly deeper blue */
+  transition: background 0.3s ease;
+}
+
+.open-btn:hover {
+  background: #0056b3; /* darker on hover */
+}
+
+.side-panel a:hover {
+  background-color: #f0f0f0; /* even lighter gray on hover */
+}

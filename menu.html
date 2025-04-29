@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaRa Food Delivery - Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<header>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/5ZvzS6j/Black-Yellow-Illustrative-Photography-Logo.png" alt="Black-Yellow-Illustrative-Photography-Logo" width="150" height="150" align="left"></a>
+<h1 style="text-align: center;">Welcome to SaRa Food Delivery</h1>
+<h3>Deliciously Cooked with Love, Delivered to Your Doorstep</h3>
+<h4>Pure Taste, Straight from Home</h4>
+</header>
+
+
+  <main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Right Side Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    /* The side panel */
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    /* Open button on the right */
+    .open-btn {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Close button inside the panel */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Button to open the panel -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<!-- The Right Side Panel -->
+<div id="rightPanel" class="side-panel">
+  <!-- Button to close the panel -->
+  <span class="close-btn" onclick="closePanel()">×</span>
+  
+  <!-- Panel Links -->
+ <a href="home.html">Home</a>
+      <a href="kitchen.html">Kitchen</a>
+      <a href="menu.html">Menu</a>
+      <a href="chips.html">Chips</a>
+      <a href="biscuit.html">Biscuit</a>
+      <a href="Choco.html">Cadbury</a>
+      <a href="booking.html">Booking</a>
+      <a href="user order details.html">Order Details</a>
+      <a href="User traking.html">Track Your Order</a>
+      <a href="about.html">About the App</a>
+      <a href="how to use the app.html">How to Use The App</a>
+      <a href="contact.html">Contact</a>
+      <a href="logout.html">Logout</a>
+
+</div>
+
+<script>
+  // Function to open the panel
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  // Function to close the panel
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+</script>
+
+</body>
+</html>
+
+<!-- Our Menu Heading and Order Now Button aligned horizontally -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+  
+  <h2 style="margin: 0;">Our Menu 🍱</h2>
+  
+  <a href="booking.html" style="
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.3s;
+  ">
+    Order Now
+  </a>
+
+</div>
+
+<!-- Button hover effect -->
+<style>
+a:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+</style>
+
+    <!-- Search Bar -->
+    <input type="text" id="search-bar" placeholder="Search for a dish..." onkeyup="searchMenu()">
+   
+<div style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin: 20px 0; font-family: Arial, sans-serif;">
+  <strong>Important Note:</strong> To know today's food menu, <a href="contact.html" style="color: #0c5460; text-decoration: underline;">contact us now</a> from our Contact Us page.
+</div>
+
+<!-- Food Images with Names -->
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
+
+  <div style="text-align: center;">
+    <img src="https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe.jpg" alt="Chicken Biryani" width="150" height="150">
+    <p>Chicken Biryani</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://paattiskitchen.com/wp-content/uploads/2023/03/kmc_20230323_230743.jpg" alt="Mutton Biryani" width="150" height="150">
+    <p>Mutton Biryani</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://spicecravings.com/wp-content/uploads/2020/10/Egg-Biryani-3-720x1080.jpg" alt="Egg Biryani" width="150" height="150">
+    <p>Egg Biryani</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://recipes.timesofindia.com/thumb/53097626.cms?imgsize=156015&width=800&height=800" alt="Dal Makhani" width="150" height="150">
+    <p>Dal Makhani</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://arbuz.com/wp-content/uploads/2019/04/Easy-Naan-Recipe.jpg" alt="Naan" width="150" height="150">
+    <p>Naan</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://th.bing.com/th/id/OIP.JidZ49KqHD-TfgW93xQ5_wHaDW?rs=1&pid=ImgDetMain" alt="RedBull" width="200" height="150">
+    <p>RedBull</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://i.pinimg.com/originals/18/96/fb/1896fb14b792755661ee36c5be04e465.jpg" alt="Shami Kebab" width="180" height="150">
+    <p>Shami Kebab</p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="https://th.bing.com/th/id/OIP.0GdTSfr1tFAY1xVoraAX6wHaF6?rs=1&pid=ImgDetMain" alt="Tandoori Chicken" width="150" height="150">
+    <p>Tandoori Chicken</p>
+  </div>
+
+</div>
+
+<div style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 18px; border-radius: 8px; margin: 20px 0; font-family: Arial, sans-serif;">
+<span style="font-weight: bold; color: #e74c3c;">Please Note:</span> 
+    For special meals, scheduling future orders, and custom meal requests, 
+    <span style="font-weight: bold; color: #e74c3c;">you must call and place your order the day before.</span>
+</div>
+
+    <!-- Menu Grid -->
+    <div id="menu-grid" class="menu-container"></div>
+
+<div style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin: 20px 0; font-family: Arial, sans-serif;">
+  <strong>Important Note:</strong> To know today's food menu, <a href="contact.html" style="color: #0c5460; text-decoration: underline;">contact us now</a> from our Contact Us page.
+</div>
+
+  </main>
+
+<!-- Order Now Button -->
+<div style="text-align: center; margin-top: 30px;">
+  <a href="booking.html" style="
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.3s;
+  ">
+    Order Now
+  </a>
+</div>
+
+<!-- Button hover effect -->
+<style>
+a:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+</style>
+
+  <footer style="
+  background-color: #343a40; /* dark gray background */
+  color: #f8f9fa;             /* light text color */
+  text-align: center;
+  padding: 20px;
+  border-top: 3px solid #ffc107; /* golden yellow top border */
+  margin-top: 40px;
+  font-family: Arial, sans-serif;
+">
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
