@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Kitchen</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Side Panel -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<div id="rightPanel" class="side-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+
+</div>
+
+<style>
+  /* Side Panel styles */
+  .side-panel {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  .side-panel a {
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #333;
+    display: block;
+    transition: 0.2s;
+    text-align: left;
+  }
+
+  .side-panel a:hover {
+    background-color: #ddd;
+  }
+
+  .open-btn {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 12px 18px;
+    background: #007bff;
+    color: white;
+    border: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1001;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  /* List styles for chefs */
+  .chefs-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .chef-item {
+    background-color: #fff;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .chef-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .chef-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+
+  .chef-info {
+    flex-grow: 1;
+  }
+
+  .chef-info h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+  }
+
+  .chef-info p {
+    margin: 5px 0;
+    color: #777;
+  }
+
+  .chef-contact {
+    text-align: right;
+    font-size: 16px;
+    color: #555;
+  }
+  footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+
+</style>
+
+<script>
+  // Open and close side panel functionality
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+</script>
+
+<header>
+  <h1>Meet Our Chefs</h1>
+</header>
+
+<main>
+  <h2>Our kitchens are clean, safe, and run by expert home chefs.</h2>
+
+  <!-- Chefs List -->
+  <ul class="chefs-list">
+    <li class="chef-item">
+      <div class="chef-left">
+      <a href="https://ibb.co/gb9Fss2q"><img src="https://i.ibb.co/5X4xqq0p/maa.jpg" alt="Chef Afira Begum" border="0"></a>
+        <div class="chef-info">
+          <h3>Chef Afira Begum</h3>
+          <p>Head Chef</p>
+          <p>Specializes in Indian cuisine with 10+ years of experience.</p>
+        </div>
+      </div>
+      <div class="chef-contact">
+        📞 +91 9875442860
+      </div>
+    </li>
+
+    <li class="chef-item">
+      <div class="chef-left">
+        <img src="chef2.jpg" alt="Chef Jane Smith">
+        <div class="chef-info">
+          <h3>Chef Jane Smith</h3>
+          <p>Pastry Chef</p>
+          <p>Bringing sweetness to every dish with a creative twist.</p>
+        </div>
+      </div>
+      <div class="chef-contact">
+        📞 +91 9123456789
+      </div>
+    </li>
+
+    <li class="chef-item">
+      <div class="chef-left">
+        <img src="chef3.jpg" alt="Chef Mike Johnson">
+        <div class="chef-info">
+          <h3>Chef Mike Johnson</h3>
+          <p>Grill Master</p>
+          <p>Expert in BBQ and smoked dishes, always ready for a challenge!</p>
+        </div>
+      </div>
+      <div class="chef-contact">
+        📞 +91 9988776655
+      </div>
+    </li>
+  </ul>
+</main>
+
+<footer style="
+  background-color: #343a40; /* dark gray background */
+  color: #f8f9fa;             /* light text color */
+  text-align: center;
+  padding: 20px;
+  border-top: 3px solid #ffc107; /* golden yellow top border */
+  margin-top: 40px;
+  font-family: Arial, sans-serif;
+">
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+</body>
+</html>

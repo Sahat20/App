@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delicious Menu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f8f8;
+    }
+
+    header {
+      background-color: #F34307;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      position: relative;
+    }
+
+    /* Right Side Panel Styles */
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      text-align: left;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    .open-btn {
+      font-size: 24px;
+      cursor: pointer;
+      padding: 12px 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card-body h3 {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .card-body p {
+      color: #666;
+      font-size: 1.1rem;
+      margin: 5px 0;
+    }
+
+    .card-body a {
+      display: inline-block;
+      background: #ff6b6b;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+
+    .card-body a:hover {
+      background: #ff4b4b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #343a40;
+      color: #f8f9fa;
+      font-size: 18px;
+      margin-top: 40px;
+      border-top: 3px solid #ffc107;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/5ZvzS6j/Black-Yellow-Illustrative-Photography-Logo.png" alt="Black-Yellow-Illustrative-Photography-Logo" width="150" height="150" align="left"></a>
+<h3 style="text-align: center;">Irresistible Snacks & Junk Food: Satisfy Your Cravings!</h3>
+</header>
+
+<!-- Right Side Panel -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<div id="rightPanel" class="side-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+
+</div>
+
+<header>
+  Everything You Need, Just a Click Away!
+</header>
+
+<div class="menu" id="menu">
+  <!-- Food cards will appear here -->
+</div>
+
+<script>
+  // Side Panel JavaScript
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+
+  // Menu Items JavaScript
+const chipsItems = [
+  {
+    name: "Lay's Classic",
+    img: "https://cdn.shopify.com/s/files/1/0686/3371/products/image_922136da-bac2-4c62-b6df-bf6a24e25048_800x.heic?v=1658390378", price: "₹20"
+  },
+  {
+    name: "Pringles Original",
+    img: "https://th.bing.com/th/id/OIP.AQ9Wpy2E-Ld9gSxMyXvmCwHaHa?rs=1&pid=ImgDetMain", price: "₹40"
+  },
+  {
+    name: "KurKure Masala Munch",
+    img: "https://m.media-amazon.com/images/I/81EhmuRbGQL._SL1500_.jpg", price: "₹30"
+  },
+  {
+    name: "Bingo! Classic",
+    img: "https://m.media-amazon.com/images/I/719CKBIuIeL._SL1500_.jpg", price: "₹25"
+  },
+  {
+    name: "Cheetos Cheese",
+    img: "https://i5.walmartimages.com/asr/4bbc626f-4f75-4354-9d86-38436e35c5a6_1.37949711221671dd17f1a285792ad676.jpeg", price: "₹35"
+  },
+  {
+    name: "Yellow Diamond Tangy",
+    img: "https://www.jiomart.com/images/product/600x600/490932145/yellow-diamond-tangy-tomato-chulbule-100-g-product-images-o490932145-p590033358-0-202211021811.jpg", price: "₹20"
+  },
+  {
+    name: "Lehar Salted",
+    img: "https://m.media-amazon.com/images/I/917UwyzARZL._SL1500_.jpg", price: "₹15"
+  },
+  {
+    name: "Haldiram's Masala",
+    img: "https://i0.wp.com/a1grocery.ca/wp-content/uploads/2021/12/803f0449-cfd3-41b3-8daa-6d0e1677333b-3637-000003547e83fbd1_file-scaled.jpeg", price: "₹40"
+  },
+  {
+    name: "Balaji Wafers Spicy",
+    img: "https://tiimg.tistatic.com/fp/1/007/784/pack-of-135-gram-spicy-and-crispy-balaji-wafers-tomato-twist-potato-chips--470.jpg", price: "₹25"
+  },
+  {
+    name: "Lay's Salted",
+    img: "https://th.bing.com/th/id/OIP.hpzeH-yDzPWOHCL0fIDedwAAAA?rs=1&pid=ImgDetMain", price: "₹10"
+  },
+  {
+    name: "Pringles Sour Cream",
+    img: "https://th.bing.com/th/id/OIP.06A8NHoJ1leQpgbO2-VIwwAAAA?rs=1&pid=ImgDetMain", price: "₹50"
+  },
+  {
+    name: "Cheetos Puffs",
+    img: "https://th.bing.com/th/id/OIP.LrRUbLhXVZ62XOQEaAOphgHaHa?rs=1&pid=ImgDetMain", price: "₹30"
+  },
+  {
+    name: "Haldiram's Roasted",
+    img: "https://m.media-amazon.com/images/I/61kanE9kceL._SX679_.jpg", price: "₹50"
+  },
+  {
+    name: "TATA Soulful Ragi Bites Choco fills",
+    img: "https://th.bing.com/th/id/OIP.UV1n5AR1OZuiEMNX6vvG8QHaIu?rs=1&pid=ImgDetMain", price: "₹45"
+  },
+  {
+    name: "Lay's Hot & Sweet Chilli",
+    img: "https://www.bigbasket.com/media/uploads/p/s/294278_18-lays-potato-chips-hot-sweet-chilli-flavour-best-quality.jpg", price: "₹10"
+  },
+  {
+    name: "Lay's Hot & Sweet Chilli",
+    img: "https://www.snackspause.com/cdn/shop/products/74012EBC-4493-4087-B50A-47A06D5C98C0.jpg?v=1679789838", price: "₹20"
+  },
+  {
+    name: "Lay's Chilli Lemon",
+    img: "https://www.aeksheafoods.at/wp-content/uploads/2023/01/LAYS-CHILLI-LEMON-70x52G-e1673957679521.png", price: "₹45"
+  },
+  {
+    name: "Lay's American Style Cream & Onion",
+    img: "https://images-na.ssl-images-amazon.com/images/I/51rmheif4sL.jpg", price: "₹45"
+  }
+];
+
+const menu = document.getElementById('menu');
+
+// Loop through chipsItems and display each item
+chipsItems.forEach(item => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img src="${item.img}" alt="${item.name}">
+    <div class="card-body">
+      <h3>${item.name}</h3>
+      <p>${item.price}</p>
+      <a href="booking.html">Book Now</a>
+    </div>
+  `;
+  menu.appendChild(card);
+});
+</script>
+
+<footer>
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SaRa Food Delivery - Home</title>
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background-image: url('img/header-background.jpg'); /* your background */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+    }
+
+    header img {
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+      height: 200px;
+      background: transparent;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin: 10px 0 5px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+
+    header h3, header h4 {
+      font-size: 24px;
+      margin: 5px 0;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      text-align: left;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    .open-btn {
+      font-size: 24px;
+      cursor: pointer;
+      padding: 12px 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    main {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    main h2 {
+      font-size: 36px;
+    }
+
+    main p {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+
+    .about-section, .gallery-section {
+      background-color: #f8f9fa;
+      padding: 30px 20px;
+      margin: 40px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .about-section h2, .gallery-section h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    /* Slider styles */
+    .slider-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 50px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 500%; /* 5 images */
+    }
+
+    .slide {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .slide img {
+      width: 20%;
+      height: 600px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<div id="rightPanel" class="side-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+</div>
+
+
+<header>
+  <h1>About the App and Owner</h1>
+</header>
+
+<main class="container">
+  <section class="app-info">
+    <h2>About the App</h2>
+    <p style="text-align: justify; font-family: 'Poppins', sans-serif; font-size: 18px; line-height: 1.6;"><b>SaRa Food Delivery</b> brings the warmth of homemade meals straight to your doorstep. Designed for people who crave authentic, healthy, and freshly prepared food, SaRa connects you with passionate home chefs in your community. Every dish is crafted with love, fresh ingredients, and traditional recipes, ensuring you enjoy meals that feel just like home.<br>
+
+Our app is simple, fast, and user-friendly. Browse a wide variety of kitchens, explore detailed menus, and place your order in just a few taps. Whether you're looking for a comforting dal-chawal, exotic biryani, or delicious homemade desserts, SaRa has something for every craving. You can also <b>call our chefs to know today’s menu and book your food directly on call</b>, making it even easier to enjoy your favorite homemade meals.<br>
+
+We prioritize quality, hygiene, and timely delivery, making sure your food reaches you fresh and delicious. <b>You can also schedule future orders, make special meal requests, and connect directly with your favorite chefs for custom orders.</b><br>
+
+With secure payment options and real-time tracking, SaRa offers a smooth and satisfying food delivery experience. We are more than just an app — we are a bridge between local talent and food lovers seeking authentic flavors.<br><br>
+
+<b>Taste the difference with SaRa Food Delivery — where every meal feels like it’s made just for you!</b>
+</p>
+  </section>
+
+  <section class="owner-info">
+    <h2>About the Owner</h2>
+    <div style="text-align: center;">
+<a href="https://ibb.co/QvszxKfW"><img src="https://i.ibb.co/YBvYVL35/sahat.jpg" alt="Sahat Ahmed" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;"></a>
+    <h3 style="font-family: 'Poppins', sans-serif; font-size: 22px; margin: 5px 0 0 0;">Sahat Ahmed</h3>
+    <p style="font-family: 'Poppins', sans-serif; font-size: 16px; color: gray; margin: 0;">CEO, SaRa Food Delivery</p>
+</div>
+
+<p style="text-align: justify; font-family: 'Poppins', sans-serif; font-size: 18px; line-height: 1.6; margin-top: 20px;">
+    <b>SaRa Food Delivery</b> was founded by <b>Sahat Ahmed</b>, a passionate food lover who believes that the heart of every great meal is love and authenticity. 
+    Inspired by family traditions and the magic of homemade food, Sahat created SaRa to connect people with home chefs who pour their heart into every dish. 
+    With a deep understanding of both technology and culinary art, Sahat has blended convenience with quality, making it easier than ever to enjoy fresh, wholesome meals without leaving your home. 
+    Dedicated to supporting local talent and promoting healthy eating, he personally ensures that every kitchen listed on SaRa meets high standards of taste, hygiene, and care. 
+    The dream behind SaRa is simple — to bring smiles to people's faces, one homemade meal at a time.
+</p>
+
+</section>
+
+
+  <p style="text-align: center; font-size: 50px; color: #FF4A01; font-weight: bold;">Thank You!</p>
+</main>
+
+<footer style="
+  background-color: #343a40; /* dark gray background */
+  color: #f8f9fa;             /* light text color */
+  text-align: center;
+  padding: 20px;
+  border-top: 3px solid #ffc107; /* golden yellow top border */
+  margin-top: 40px;
+  font-family: Arial, sans-serif;
+">
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+<script>
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Orders</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: auto; }
+    .order-card {
+      background: #fff; padding: 15px; border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 15px;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+
+
+/* The side panel */
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    .side-panel a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .side-panel a:hover {
+      background-color: #ddd;
+    }
+
+    /* Open button on the right */
+    .open-btn {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Close button inside the panel */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+
+
+
+  </style>
+
+
+
+
+</head>
+<body>
+
+
+
+
+<!-- Button to open the panel -->
+<button class="open-btn" onclick="openPanel()">☰</button>
+
+<!-- The Right Side Panel -->
+<div id="rightPanel" class="side-panel">
+  <!-- Button to close the panel -->
+  <span class="close-btn" onclick="closePanel()">×</span>
+  
+  <!-- Panel Links -->
+ <a href="home.html">Home</a>
+  <a href="kitchen.html">Kitchen</a>
+  <a href="menu.html">Menu</a>
+  <a href="chips.html">Chips</a>
+  <a href="biscuit.html">Biscuit</a>
+  <a href="Choco.html">Cadbury</a>
+  <a href="booking.html">Booking</a>
+  <a href="user order details.html">Order Details</a>
+  <a href="User traking.html">Track Your Order</a>
+  <a href="about.html">About the App</a>
+  <a href="how to use the app.html">How to Use The App</a>
+  <a href="contact.html">Contact</a>
+  <a href="logout.html">Logout</a>
+
+</div>
+
+<script>
+  // Function to open the panel
+  function openPanel() {
+    document.getElementById("rightPanel").style.width = "250px";
+  }
+
+  // Function to close the panel
+  function closePanel() {
+    document.getElementById("rightPanel").style.width = "0";
+  }
+</script>
+
+
+
+
+
+
+  <div class="container">
+    <h2>My Orders</h2>
+    <div id="orders"></div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCSrIMO6NciLkC1vZ2rDdl31kmIas5X13w",
+      authDomain: "order-5aa43.firebaseapp.com",
+      projectId: "order-5aa43",
+      storageBucket: "order-5aa43.appspot.com",
+      messagingSenderId: "1092838567302",
+      appId: "1:1092838567302:web:83d739f68c4fafaf5d9007",
+      measurementId: "G-WTW0QT6P4Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+
+    const ordersDiv = document.getElementById("orders");
+
+    const ordersQuery = query(collection(db, "orders"), orderBy("timestamp", "desc"));
+    onSnapshot(ordersQuery, (snapshot) => {
+      ordersDiv.innerHTML = "";
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        ordersDiv.innerHTML += `
+          <div class="order-card">
+            <strong>Order ID:</strong> ${data.orderId} <br>
+            <strong>Name:</strong> ${data.userName} <br>
+            <strong>Phone:</strong> ${data.phone} <br>
+            <strong>Email:</strong> ${data.email} <br>
+            <strong>Address:</strong> ${data.address} <br>
+            <strong>Date:</strong> ${data.date} <br>
+            <strong>Status:</strong> ${data.status}<br>
+            <strong>Items:</strong>
+            ${data.items.map(item => `${item.name}`).join("<br>")}
+            <br><strong>Total:</strong> ₹${data.total}
+          </div>
+        `;
+      });
+    });
+  </script>
+
+
+<footer style="
+  background-color: #343a40; /* dark gray background */
+  color: #f8f9fa;             /* light text color */
+  text-align: center;
+  padding: 20px;
+  border-top: 3px solid #ffc107; /* golden yellow top border */
+  margin-top: 40px;
+  font-family: Arial, sans-serif;
+">
+  © 2025 SaRa Food Delivery | All Rights Reserved 🍽️
+</footer>
+
+
+
+
+</body>
+</html>

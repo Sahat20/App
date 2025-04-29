@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f2f2f2;
+    }
+
+    .payment-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      transform: translateY(0);
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      font-size: 28px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .input-field {
+      margin: 15px 0;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .input-field input:focus {
+      border-color: #5fa8d3;
+      box-shadow: 0 0 5px rgba(95, 168, 211, 0.5);
+    }
+
+    .payment-btn {
+      background-color: #5fa8d3;
+      color: white;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .payment-btn:hover {
+      background-color: #4a90b4;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .footer a {
+      color: #5fa8d3;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .payment-option {
+      display: none;
+    }
+
+    .payment-option.active {
+      display: block;
+    }
+
+    .select-method {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+      transition: all 0.3s;
+    }
+
+    /* Popup style */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .popup.active {
+      display: block;
+    }
+
+    .popup h3 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .popup p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .popup .close-btn {
+      background-color: #5fa8d3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .popup .close-btn:hover {
+      background-color: #4a90b4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="payment-container">
+    <div class="header">
+      <h2>Secure Payment</h2>
+    </div>
+
+    <!-- Payment Method Dropdown -->
+    <div class="input-field">
+      <select class="select-method" onchange="togglePaymentMethod(this.value)">
+        <option value="">Select Payment Method</option>
+        <option value="upi">UPI</option>
+        <option value="card">Credit/Debit Card</option>
+        <option value="qr">QR Code</option>
+        <option value="cod">Cash on Delivery</option>
+      </select>
+    </div>
+
+    <!-- UPI Payment Form -->
+    <div class="payment-option" id="upi">
+      <div class="input-field">
+        <input type="text" placeholder="Enter UPI ID" required>
+      </div>
+      <!-- SMS Input Field -->
+      <div class="input-field">
+        <input type="text" placeholder="Add any comments or details related to your order" required>
+      </div>
+      <button class="payment-btn" onclick="completePayment('UPI')">Pay via UPI</button>
+    </div>
+
+    <!-- Credit/Debit Card Payment Form -->
+    <div class="payment-option" id="card">
+      <div class="input-field">
+        <input type="text" placeholder="Card Holder Name" required>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Card Number" required>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="MM/YY" required>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="CVV" required>
+      </div>
+      <!-- SMS Input Field -->
+      <div class="input-field">
+        <input type="text" placeholder="Add any comments or details related to your order" required>
+      </div>
+      <button class="payment-btn" onclick="completePayment('Card')">Pay via Card</button>
+    </div>
+
+    <!-- QR Code Payment Form -->
+    <div class="payment-option" id="qr">
+      <div class="input-field">
+      </div>
+      <!-- QR Code Image -->
+      <div class="qr-code">
+        <img src="path-to-your-qr-code.png" alt="QR Code" style="width: 100%; max-width: 300px; margin-top: 15px;">
+      </div>
+      <!-- SMS Input Field -->
+      <div class="input-field">
+        <input type="text" placeholder="Add any comments or details related to your order" required>
+      </div>
+      <button class="payment-btn" onclick="completePayment('QR')">Pay via QR Code</button>
+    </div>
+
+    <!-- Cash on Delivery Form -->
+    <div class="payment-option" id="cod">
+      <p>Choose this option to pay when your order is delivered to you.</p>
+      <!-- SMS Input Field -->
+      <div class="input-field">
+        <input type="text" placeholder="Add any comments or details related to your order" required>
+      </div>
+      <button class="payment-btn" onclick="completePayment('COD')">Pay via COD</button>
+    </div>
+
+    <div class="footer">
+      <p>By proceeding, you agree to our <a href="#">Terms & Conditions</a>.</p>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <h3>Payment Successful!</h3>
+    <p>Your Order Tracking ID: <strong id="tracking-id"></strong></p>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+  </div>
+
+  <script>
+    function togglePaymentMethod(method) {
+      // Hide all payment forms
+      const forms = document.querySelectorAll('.payment-option');
+      forms.forEach(form => form.classList.remove('active'));
+
+      // Show the selected payment method form
+      if (method) {
+        const selectedForm = document.getElementById(method);
+        selectedForm.classList.add('active');
+      }
+    }
+
+    function completePayment(method) {
+      // Generate a random 5-digit order tracking ID
+      const trackingID = Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('tracking-id').textContent = trackingID;
+
+      // Show the popup
+      document.getElementById('popup').classList.add('active');
+    }
+
+    function closePopup() {
+      // Close the popup
+      document.getElementById('popup').classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
